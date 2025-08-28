@@ -1,0 +1,139 @@
+@{
+    ViewData["Title"] = ViewBag.Title;
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-success mb-4">@ViewBag.Title</h1>
+            
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên</th>
+                            <th>Email</th>
+                            <th>Vai trò</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in ViewBag.Users)
+                        {
+                            <tr>
+                                <td>@user.Id</td>
+                                <td>
+                                    <strong>@user.Name</strong>
+                                </td>
+                                <td>
+                                    <a href="mailto:@user.Email" class="text-decoration-none">
+                                        @user.Email
+                                    </a>
+                                </td>
+                                <td>
+                                    @if (user.Role == "Admin")
+                                    {
+                                        <span class="badge bg-danger">@user.Role</span>
+                                    }
+                                    else if (user.Role == "Moderator")
+                                    {
+                                        <span class="badge bg-warning text-dark">@user.Role</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-info">@user.Role</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (user.Status == "Hoạt động")
+                                    {
+                                        <span class="badge bg-success">@user.Status</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">@user.Status</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Profile", "User", new { id = user.Id })" 
+                                       class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-user"></i> Xem hồ sơ
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Thống kê:</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Tổng số người dùng
+                                <span class="badge bg-primary rounded-pill">@ViewBag.Users.Length</span>
+                            </li>
+                            @{
+                                var adminCount = 0;
+                                var moderatorCount = 0;
+                                var userCount = 0;
+                                foreach (var user in ViewBag.Users)
+                                {
+                                    if (user.Role == "Admin") adminCount++;
+                                    else if (user.Role == "Moderator") moderatorCount++;
+                                    else if (user.Role == "User") userCount++;
+                                }
+                            }
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Admin
+                                <span class="badge bg-danger rounded-pill">@adminCount</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Moderator
+                                <span class="badge bg-warning rounded-pill">@moderatorCount</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                User
+                                <span class="badge bg-info rounded-pill">@userCount</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">
+                            <i class="fas fa-home"></i> Về trang chủ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-success {
+        color: #28a745 !important;
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+    
+    .btn-outline-primary {
+        border-color: #007bff;
+        color: #007bff;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+    }
+    
+    .badge {
+        font-size: 0.8em;
+    }
+</style>

@@ -1,0 +1,190 @@
+@{
+    ViewData["Title"] = ViewBag.Title;
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "User")">Người dùng</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Hồ sơ</li>
+                </ol>
+            </nav>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card shadow">
+                        <div class="card-body text-center">
+                            <div class="mb-3">
+                                <i class="fas fa-user-circle fa-6x text-success"></i>
+                            </div>
+                            <h4 class="card-title">@ViewBag.User.Name</h4>
+                            <p class="text-muted">@ViewBag.User.Email</p>
+                            
+                            @if (ViewBag.User.Role == "Admin")
+                            {
+                                <span class="badge bg-danger fs-6">@ViewBag.User.Role</span>
+                            }
+                            else if (ViewBag.User.Role == "Moderator")
+                            {
+                                <span class="badge bg-warning text-dark fs-6">@ViewBag.User.Role</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-info fs-6">@ViewBag.User.Role</span>
+                            }
+                            
+                            <div class="mt-3">
+                                @if (ViewBag.User.Status == "Hoạt động")
+                                {
+                                    <span class="badge bg-success">@ViewBag.User.Status</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">@ViewBag.User.Status</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-8">
+                    <div class="card shadow">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-info-circle"></i> Thông tin chi tiết
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <td width="120"><strong>ID:</strong></td>
+                                            <td>#@ViewBag.User.Id</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Họ tên:</strong></td>
+                                            <td>@ViewBag.User.Name</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Email:</strong></td>
+                                            <td>
+                                                <a href="mailto:@ViewBag.User.Email" class="text-decoration-none">
+                                                    @ViewBag.User.Email
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Số điện thoại:</strong></td>
+                                            <td>
+                                                <a href="tel:@ViewBag.User.Phone" class="text-decoration-none">
+                                                    @ViewBag.User.Phone
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <td width="120"><strong>Vai trò:</strong></td>
+                                            <td>
+                                                @if (ViewBag.User.Role == "Admin")
+                                                {
+                                                    <span class="badge bg-danger">@ViewBag.User.Role</span>
+                                                }
+                                                else if (ViewBag.User.Role == "Moderator")
+                                                {
+                                                    <span class="badge bg-warning text-dark">@ViewBag.User.Role</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-info">@ViewBag.User.Role</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Trạng thái:</strong></td>
+                                            <td>
+                                                @if (ViewBag.User.Status == "Hoạt động")
+                                                {
+                                                    <span class="badge bg-success">@ViewBag.User.Status</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary">@ViewBag.User.Status</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Ngày tham gia:</strong></td>
+                                            <td>@ViewBag.User.JoinDate</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Đăng nhập cuối:</strong></td>
+                                            <td>@ViewBag.User.LastLogin</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-3">
+                                <strong>Địa chỉ:</strong>
+                                <p class="text-muted">@ViewBag.User.Address</p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="@Url.Action("Index", "User")" class="btn btn-outline-success">
+                                <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                            </a>
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">
+                                <i class="fas fa-home"></i> Về trang chủ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .breadcrumb a {
+        color: #28a745;
+        text-decoration: none;
+    }
+    
+    .breadcrumb a:hover {
+        text-decoration: underline;
+    }
+    
+    .bg-success {
+        background-color: #28a745 !important;
+    }
+    
+    .text-success {
+        color: #28a745 !important;
+    }
+    
+    .btn-outline-success {
+        border-color: #28a745;
+        color: #28a745;
+    }
+    
+    .btn-outline-success:hover {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: white;
+    }
+    
+    .badge {
+        font-size: 0.9em;
+    }
+    
+    .fs-6 {
+        font-size: 1rem !important;
+    }
+</style>

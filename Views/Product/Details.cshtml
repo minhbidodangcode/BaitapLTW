@@ -1,0 +1,106 @@
+@{
+    ViewData["Title"] = ViewBag.Title;
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Product")">Sản phẩm</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Chi tiết</li>
+                </ol>
+            </nav>
+            
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">@ViewBag.Product.Name</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td width="150"><strong>Mã sản phẩm:</strong></td>
+                                    <td>#@ViewBag.Product.Id</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tên sản phẩm:</strong></td>
+                                    <td>@ViewBag.Product.Name</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Danh mục:</strong></td>
+                                    <td>
+                                        <span class="badge bg-info">@ViewBag.Product.Category</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Giá:</strong></td>
+                                    <td>
+                                        <span class="text-danger fw-bold fs-5">
+                                            @ViewBag.Product.Price.ToString("N0") VNĐ
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mô tả:</strong></td>
+                                    <td>@ViewBag.Product.Description</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div class="bg-light p-4 rounded">
+                                    <i class="fas fa-box fa-4x text-primary mb-3"></i>
+                                    <h5>Sản phẩm có sẵn</h5>
+                                    <p class="text-muted">Liên hệ để đặt hàng</p>
+                                    <button class="btn btn-success btn-lg">
+                                        <i class="fas fa-shopping-cart"></i> Đặt hàng
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Index", "Product")" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                    </a>
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">
+                        <i class="fas fa-home"></i> Về trang chủ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .breadcrumb a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    
+    .breadcrumb a:hover {
+        text-decoration: underline;
+    }
+    
+    .bg-primary {
+        background-color: #007bff !important;
+    }
+    
+    .text-primary {
+        color: #007bff !important;
+    }
+    
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+    
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+</style>
